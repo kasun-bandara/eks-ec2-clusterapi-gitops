@@ -59,4 +59,8 @@ kind: AWSManagedMachinePool
 metadata:
   name: capi-eks-pool-0
   namespace: default
+  subnets:
+    - id: subnet-0285f5f368ebe92f5
+    - id: subnet-04a3ea8069c5c5996
+    - id: subnet-0518b2031d134a71f
 spec: {}
