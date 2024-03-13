@@ -26,6 +26,11 @@ spec:
   region: us-east-1
   sshKeyName: capi-eks
   version: v1.29.0
+  network:
+    vpc:
+      id: vpc-07733c911327481c0
+      cidrBlock: 10.254.128.0/19
+      internetGatewayId: igw-0a271f183ad39aec3
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
