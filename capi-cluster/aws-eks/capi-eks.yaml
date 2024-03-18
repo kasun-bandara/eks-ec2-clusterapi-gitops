@@ -26,6 +26,7 @@ spec:
   region: us-east-1
   sshKeyName: capi-eks
   version: v1.29.0
+  disableVPCCNI: true
   network:
     vpc:
       id: vpc-07733c911327481c0
