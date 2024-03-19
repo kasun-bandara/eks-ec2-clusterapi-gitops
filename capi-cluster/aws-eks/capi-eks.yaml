@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: capi-eks
+  name: pw-staging
   namespace: default
 spec:
   clusterNetwork:
@@ -11,16 +11,22 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta2
     kind: AWSManagedControlPlane
-    name: capi-eks-control-plane
+    name: pw-staging-control-plane
   infrastructureRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta2
-    kind: AWSManagedControlPlane
-    name: capi-eks-control-plane
+    kind: AWSManagedCluster
+    name: pw-staging
+---
+kind: AWSManagedCluster
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+metadata:
+  name: pw-staging
+spec: {}
 ---
 apiVersion: controlplane.cluster.x-k8s.io/v1beta2
 kind: AWSManagedControlPlane
 metadata:
-  name: capi-eks-control-plane
+  name: pw-staging-control-plane
   namespace: default
 spec:
   region: us-east-1
@@ -43,11 +49,11 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:
-  name: capi-eks-pool-0
+  name: default-machine-pool
   namespace: default
 spec:
   clusterName: capi-eks
-  replicas: 2
+  replicas: 1
   template:
     spec:
       bootstrap:
@@ -56,15 +62,15 @@ spec:
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
         kind: AWSManagedMachinePool
-        name: capi-eks-pool-0
+        name: default-machine-pool
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: AWSManagedMachinePool
 metadata:
-  name: capi-eks-pool-0
+  name: default-machine-pool
   namespace: default
-  subnets:
-    - id: subnet-0285f5f368ebe92f5
-    - id: subnet-04a3ea8069c5c5996
-    - id: subnet-0518b2031d134a71f
-spec: {}
+spec:
+  subnetIDs:
+    - subnet-0285f5f368ebe92f5
+    - subnet-04a3ea8069c5c5996
+    - subnet-0518b2031d134a71f
