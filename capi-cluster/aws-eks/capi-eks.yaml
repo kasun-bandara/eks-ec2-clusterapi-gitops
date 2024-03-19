@@ -25,7 +25,7 @@ metadata:
 spec:
   region: us-east-1
   sshKeyName: capi-eks
-  version: v1.29.0
+  version: v1.29.1
   disableVPCCNI: true
   network:
     vpc:
